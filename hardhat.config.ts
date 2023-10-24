@@ -7,15 +7,16 @@ const config: HardhatUserConfig = {
    networks: {
       hardhat: {
          forking: {
-            url: "https://polygon-mumbai.g.alchemy.com/v2/XayCXo6oFDxnTlU-onyYNCtarlF3ESFp",
-            blockNumber: 40948339,
+            url: "https://polygon-mainnet.g.alchemy.com/v2/a3jXuouvJtMzPzTfYnjQcaZOHJzE-A_x",
+            blockNumber: 48608156,
          },
+         // loggingEnabled: true,
       },
    },
    solidity: {
       compilers: [
          {
-            version: "0.8.20",
+            version: "0.7.6",
             settings: {
                optimizer: {
                   enabled: true,
@@ -24,7 +25,7 @@ const config: HardhatUserConfig = {
             },
          },
          {
-            version: "0.7.6",
+            version: "0.8.20",
             settings: {
                optimizer: {
                   enabled: true,
