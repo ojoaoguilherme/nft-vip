@@ -81,15 +81,23 @@ contract TokenSale is Initializable, ReentrancyGuardUpgradeable {
 
       console.log("MATIC restante para o swap DAI", fullIncome);
 
-      payable(address(this)).transfer(fullIncome);
+      //prettier-ignore
+      (bool sentFullIncome, ) = payable(address(this)).call{value: matic}("");
+      require(sentFullIncome == true, "Failed to send full income");
 
-      receiver.transfer(receiverFee);
+      (bool sentReceiverFee, ) = receiver.call{value: receiverFee}("");
+      require(sentReceiverFee == true, "Failed to send receiver fee");
 
       // Check if `msg.sender` sent `msg.value` more than enough
       uint256 remaining = matic - price;
 
       if (remaining > 0) {
-         payable(msg.sender).transfer(remaining);
+         //prettier-ignore
+         (bool sentRemainingGas, ) = payable(msg.sender).call{value: remaining}("");
+         require(
+            sentRemainingGas == true,
+            "Failed to send remaining gas to caller"
+         );
       }
 
       // Convert MATIC to W - Matic

@@ -18,6 +18,8 @@ const MATIC_USD_PRICE_FEED = "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0";
 const WMATIC_TOKEN = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
 const DAI_TOKEN = "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063";
 
+const walletExample = "0x77bCE4769851fF24A13c1616EAD06a21431baE93";
+
 describe("Testando o Token Sale", function () {
    async function deployContracts() {
       // Deploying NFT
@@ -57,6 +59,11 @@ describe("Testando o Token Sale", function () {
          400,
          WMATIC_TOKEN,
          swap.target,
+         DAI_TOKEN, // DAI
+         walletExample,
+         walletExample,
+         walletExample,
+         walletExample,
       ])) as unknown as TokenSale;
       await cut.waitForDeployment();
 
@@ -116,7 +123,7 @@ describe("Testando o Token Sale", function () {
       expect(await dai.balanceOf(cut.target)).to.be.greaterThan(0);
    });
 
-   it.only("deve ser calculado corretamente ao vender NFT", async function () {
+   it("deve ser calculado corretamente ao vender NFT", async function () {
       const { cut, dai } = await loadFixture(deployContracts);
       const tokenPrice = parseFloat(formatEther(await cut.tokenPrice()));
       const comissionFee = (tokenPrice * 4) / 100;
