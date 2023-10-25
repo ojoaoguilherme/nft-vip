@@ -125,7 +125,7 @@ contract TokenSale is Initializable, ReentrancyGuardUpgradeable {
    }
 
    function sendTokensToWallets(uint256 amountIn) internal {
-      uint256 teamBaseFee = (amountIn * 40) / 100; // 40%
+      uint256 teamBaseFee = (amountIn * 10) / 100; // 10%
 
       // investimento RDG
       uint256 treasuryFee = (amountIn * 60) / 100; //60%
@@ -134,6 +134,7 @@ contract TokenSale is Initializable, ReentrancyGuardUpgradeable {
       dai.safeTransfer(ivan, teamBaseFee);
       dai.safeTransfer(paguru, teamBaseFee);
       dai.safeTransfer(rogerio, teamBaseFee);
+      
       dai.safeTransfer(rotas, treasuryFee);
    }
 
